@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Student List</h1>
+{% if questions1%}
+
+<form action="/quizdb/validate_answer/" method="post">{% csrf_token %}
+    {% for question in questions1%}
+
+    Question: {{question.question}}
+    <br>
+    <br>
+
+    <input type="radio" id="option1" name="question{{question.question_id}}" value="1">
+    <label for="option1">Option1: {{question.option1}}</label>
+    <br>
+    <input type="radio" id="option2" name="question{{question.question_id}}" value="2">
+    <label for="option2">Option2: {{question.option2}}</label>
+    <br>
+    <input type="radio" id="option3" name="question{{question.question_id}}" value="3">
+    <label for="option3">Option3: {{question.option3}}</label>
+    <br>
+    <input type="radio" id="option4" name="question{{question.question_id}}" value="4">
+    <label for="option4">Option4: {{question.option4}}</label>
+    <br>
+
+    <br><br><br><br><br><br><br>
+
+    {% endfor %}
+
+    <input type="submit" value="Submit">
+
+
+
+    {% endif %}
+    {% endblock %}

@@ -1,0 +1,24 @@
+
+{% block content %}
+{% if form.errors %}
+<p class="error"> Invalid Question </p>
+
+{% endif %}
+<form action="/quizdb/add_quiz/" method = "post">{% csrf_token %}
+<label for="quiz_id">Quiz_id: </label>
+<input type="number" name = "quiz_id" value = "" id="quiz_id">
+<label for="quiz_name"> Quiz name: </label>
+<input type="quiz_name" name = "quiz_name" value = "" id="quiz_name">
+<br><br>
+<label for="Duration">Duration : </label>
+<input type="duration" name = "duration" value = "" id="duration">
+<br><br>
+<input type="submit" value="Enter"/>
+
+<br><br>
+
+
+
+
+
+{% endblock %}

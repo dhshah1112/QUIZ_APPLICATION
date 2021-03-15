@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+{% if form.errors %}
+<p class="error"> Invalid Username or Password </p>
+{% endif %}
+{% load static %}
+
+<form action="/loginmodule/auth/" method = "post">{% csrf_token %}
+  
+    <meta charset="utf-8">
+    
+   <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+  
+ 
+ <div class="banner">
+ <div class="login-box">
+  <h1>Login</h1>
+  <div class="textbox">
+    <i class="fas fa-user"></i>
+
+    <input type="text"  name = "username" placeholder="Username" value = "" id="username">
+  </div>
+
+  <div class="textbox">
+    <i class="fas fa-lock"></i>
+    <input type="password"  name="password" placeholder="Password" value = ""  id="password">
+  </div>
+
+  <input type="submit" class="btn" value="login"/>
+ 
+ <a href="/quizdb/addstudentinfo"> <font color="Green">Sing Up</font></a>  
+</div>
+  </body>
+</html>
+{% endblock %}

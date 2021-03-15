@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<form action="/quizdb/delstudentinfo/" method = "post">{% csrf_token %}
+
+<label for="user_name">Student Name : </label>
+<input type="text" name = "user_name" value = "" id="user_name">
+
+
+<input type="submit" value="Enter"/>
+</form>
+<p> Click <a href="/quizdb/viewinfo"</a> to view student records. </p>
+{% endblock %}

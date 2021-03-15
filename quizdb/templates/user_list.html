@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Student List</h1>
+{% if users%}
+<ul>
+{% for user in users%}
+<li>Username: {{user.user.username}} Email: {{user.user.email}} Contact No.:{{user.contact_no}}  Address: {{user.address}}</li>
+{% endfor %}
+</ul>
+{% else %}
+<p>There are no students registered.</p>
+{% endif %}
+<p> Click <a href="/quizdb/getstudentinfo/">to add new record.</a>  </p>
+
+<p> Click <a href="/quizdb/getusername_update/"> to update record. </a>  </p>
+{% endblock %}
