@@ -117,7 +117,6 @@ def add_quiz(request):
        # return render(request,'addteacher_questioninfo.html')
         return HttpResponseRedirect('/quizdb/addteacher_questioninfo')
     else:
-        print("123")
         return render(request,'add_quiz.html')
 def give_quiz(request):
     questions1=questions.objects.all()
@@ -126,13 +125,14 @@ def give_quiz(request):
 def validate_answer(request):
     selectedOptions=[]
     correctAnswers=[]
+    question_id=[]
     if request.method=="POST":
         questions1=questions.objects.all()
         for question in questions1:
             selectedOptions.append(request.POST.get('question' + str(question.question_id),''))
             correctAnswers.append(question.correct_answer)
-        
+            question_id.append(question.question_id)
             
-    mylist=zip(selectedOptions,correctAnswers)
+    mylist=zip(selectedOptions,correctAnswers,question_id)
     return render(request,'validate_answer.html',{'mylist':mylist})    
         

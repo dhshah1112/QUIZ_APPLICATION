@@ -4,11 +4,28 @@
 </head>
 <body>
     <div class="row">
-        {% for i,j in mylist %}
-        Your answer: {{i}}
+        {% for i,j,k in mylist %}
+       <h2> Question {{k}} </h2>
+        
+        {% if i == j %}
+        Your answer: &nbsp; &nbsp;{{i}} 
+        &#10003;
+        <br>
         Correct answer: {{j}}
+        <h3>Your answer is correct</h3>
+        
+        {% endif %}
+        {% if i != j %}
+        Your answer:  &nbsp; &nbsp; {{i}}
+         
+        &#10006;
+        <br>
+        Correct answer: {{j}}
+        {% endif %}
+       
        <br />
 {% endfor %}
+
     </div>
 </body>
 </html>
