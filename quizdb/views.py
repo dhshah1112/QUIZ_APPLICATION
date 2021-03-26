@@ -123,16 +123,32 @@ def give_quiz(request):
     return render(request,'give_quiz.html',{'questions1':questions1})
 
 def validate_answer(request):
+    cnt=0
+    cnt2=0
     selectedOptions=[]
     correctAnswers=[]
     question_id=[]
+    solution=[]
     if request.method=="POST":
         questions1=questions.objects.all()
         for question in questions1:
             selectedOptions.append(request.POST.get('question' + str(question.question_id),''))
             correctAnswers.append(question.correct_answer)
             question_id.append(question.question_id)
-            
-    mylist=zip(selectedOptions,correctAnswers,question_id)
-    return render(request,'validate_answer.html',{'mylist':mylist})    
+            cnt2=cnt2+1
+            solution.append(question.solution)
+    i=0
+    j=0
+    l=len(selectedOptions)
+    while(l):
+            if selectedOptions[i]==correctAnswers[j]:
+                cnt=cnt+1
+            i=i+1
+            j=j+1 
+            l=l-1    
+    mylist=zip(selectedOptions,correctAnswers,question_id,solution)
+    accuracy=(cnt/cnt2)*100
+    return render(request,'validate_answer.html',{'mylist':mylist,'cnt':cnt,'cnt2':cnt2,'accuracy':accuracy})    
         
+[2,2]
+[2,3]

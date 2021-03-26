@@ -22,7 +22,7 @@ def auth_view(request):
         return invalidlogin(request)
 
 def loggedin(request):
-    return render(request,'loggedin.html')
+    return render(request,'index.html')
 
 def invalidlogin(request):
     return render(request,'invalidlogin.html')
@@ -30,3 +30,6 @@ def invalidlogin(request):
 def logout(request):
     auth.logout(request)
     return render(request,'logout.html')
+    
+def registration(request):
+    return render(request,'registration.html')   

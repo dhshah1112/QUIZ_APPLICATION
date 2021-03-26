@@ -4,16 +4,57 @@
 </head>
 <body>
     <div class="row">
-        {% for i,j,k in mylist %}
-       <h2> Question {{k}} </h2>
+        <title>Result</title>
+      <table width="600px" border="2" align="center" height="200px" >
+        <tr>
+            <th colspan="4" height="1">
+            
+                
+                   <font size="50">Result</font> 
+                
+            
+            </th>
+        </tr>
+        <tr>
+            <td>
+              Total Questions:
+            </td>
+            <td>
+                {{cnt2}}
+              </td>
+        </tr>
+        <tr>
+            <td>
+                Correct answers: 
+            </td>
+            <td>
+                 {{cnt}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Accuracy:
+            </td>
+            <td>
+                {{accuracy}} %
+            </td>
+        </tr>
+       
         
+    </table>
+        {% for i,j,k,l in mylist %}
+       <h2> Question {{k}} </h2>
+    
         {% if i == j %}
         Your answer: &nbsp; &nbsp;{{i}} 
-        &#10003;
+        &#10004;
         <br>
         Correct answer: {{j}}
+        <br>
+        Solution: {{l}}
         <h3>Your answer is correct</h3>
         
+        <br>
         {% endif %}
         {% if i != j %}
         Your answer:  &nbsp; &nbsp; {{i}}
@@ -21,8 +62,11 @@
         &#10006;
         <br>
         Correct answer: {{j}}
+        <br>
+        Solution: {{l}}
         {% endif %}
-       
+        
+        
        <br />
 {% endfor %}
 

@@ -1,9 +1,15 @@
-{% extends "base.html" %}
-{% block content %}
-<h1>Student List</h1>
-{% if questions1%}
 
-<form action="/quizdb/validate_answer/" method="post">{% csrf_token %}
+{% if questions1%}
+<html>
+<body >
+    
+    <style>
+        h1 {text-align: center;}
+        p {text-align: center;}
+        div {text-align: center;}
+        </style>
+    
+<form action="/quizdb/validate_answer/"  method="post">{% csrf_token %}
     {% for question in questions1%}
 
     Question: {{question.question}}
@@ -29,7 +35,8 @@
 
     <input type="submit" value="Submit">
 
+</body>
 
-
+</html>
     {% endif %}
-    {% endblock %}
+ 

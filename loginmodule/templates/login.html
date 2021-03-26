@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 
 
-{% extends 'base.html' %}
 
 {% block content %}
 {% if form.errors %}
@@ -16,7 +15,8 @@
    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
   
  
- <div class="banner">
+   <div class="banner">
+    
  <div class="login-box">
   <h1>Login</h1>
   <div class="textbox">
@@ -32,7 +32,9 @@
 
   <input type="submit" class="btn" value="login"/>
  
- <a href="/quizdb/addstudentinfo"> <font color="Green">Sing Up</font></a>  
+ <a href="/quizdb/addstudentinfo"> <font color="Green">Sign Up</font></a>  
+</div>
+
 </div>
   </body>
 </html>

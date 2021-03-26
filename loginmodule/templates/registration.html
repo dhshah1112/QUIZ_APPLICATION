@@ -1,0 +1,38 @@
+
+</<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  {% load static %}
+  <head>
+    <meta charset="utf-8">
+    <title>Quiz</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style1.css' %}">
+  </head>
+  <body>
+    <form action="/loginmodule/login/" method = "post">{% csrf_token %}
+    <div class="banner">
+      <div class="navbar" >
+   <div class="logo">
+   </div>
+          <ul >
+              <li >
+                <a href="/loginmodule/registration">Home </a></li>
+              <li><a href="/quizdb/addstudentinfo">Sign Up </a></li>
+
+              <li><a href="#">Categories </a></li>
+              <li><a href="#">Contact Us</a></li>
+          </ul>
+
+      </div>
+        <div class="content">
+          <img src="{% static 'images-removebg-preview.png' %}">
+          <div>
+            <br>
+            <button type="submit" ><span></span>Login</button>
+            
+            
+          </div>
+        </div>
+
+    </div>
+  </body>
+</html>
