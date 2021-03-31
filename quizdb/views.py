@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect,HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import auth
+from reportlab.pdfgen import canvas
 #import pymysql
 from quizdb.models import user1
 from django.views import generic
@@ -51,7 +52,7 @@ def viewinfo(request):
      return render(request,'user_list.html',{'users':users})
 def updateinfo(request):
     user_name = request.POST.get('user_name', '')
-    student = user1.objects.filter(username = user_name)
+    student = User.objects.filter(username = user_name)
     if not student :
         return HttpResponseRedirect('/quizdb/delunsuccess/')
     else:
@@ -62,7 +63,7 @@ def delunsuccess(request):
     return render(request,'notfound.html')
 def delstudentinfo(request):
     user_name = request.POST.get('user_name', '')
-    student = user1.objects.filter(username = user_name)
+    student = User.objects.filter(username = user_name)
     if not student :
         return HttpResponseRedirect('/quizdb/delunsuccess/')
     else:
@@ -70,18 +71,22 @@ def delstudentinfo(request):
             s.delete()
         return  render(request,'delrecord.html')
 def addquestioninfo(request):
-     question = request.POST.get('question', '')
-     option1 = request.POST.get('option1', '')
-     option2 = request.POST.get('option2', '')
-     option3 = request.POST.get('option3', '')
-     option4 = request.POST.get('option4', '')
-     correct_answer = request.POST.get('correct_answer', '')
-     solution = request.POST.get('solution', '')
-     question_full=questions(question=question,option1=option1,option2=option2,option3=option3,option4=option4,correct_answer=correct_answer,solution=solution)
-     question_full.save()
-     question = request.POST.get('add_question', '')
-     if not question:
-        return render(request,'Quiz_success.html')
+     if request.method=='POST':
+        question = request.POST.get('question', '')
+        option1 = request.POST.get('option1', '')
+        option2 = request.POST.get('option2', '')
+        option3 = request.POST.get('option3', '')
+        option4 = request.POST.get('option4', '')
+        correct_answer = request.POST.get('correct_answer', '')
+        solution = request.POST.get('solution', '')
+        question_full=questions(question=question,option1=option1,option2=option2,option3=option3,option4=option4,correct_answer=correct_answer,solution=solution)
+        question_full.save()
+        question = request.POST.get('add_question', '')
+        if not question:
+            return render(request,'Quiz_success.html')
+        else:
+            return render(request,'addquestion.html')
+
      else:
         return render(request,'addquestion.html')
      
@@ -129,9 +134,11 @@ def validate_answer(request):
     correctAnswers=[]
     question_id=[]
     solution=[]
+    ques=[]
     if request.method=="POST":
         questions1=questions.objects.all()
         for question in questions1:
+            ques.append(question.question)
             selectedOptions.append(request.POST.get('question' + str(question.question_id),''))
             correctAnswers.append(question.correct_answer)
             question_id.append(question.question_id)
@@ -146,9 +153,26 @@ def validate_answer(request):
             i=i+1
             j=j+1 
             l=l-1    
-    mylist=zip(selectedOptions,correctAnswers,question_id,solution)
+    mylist=zip(selectedOptions,correctAnswers,question_id,solution,ques)
     accuracy=(cnt/cnt2)*100
-    return render(request,'validate_answer.html',{'mylist':mylist,'cnt':cnt,'cnt2':cnt2,'accuracy':accuracy})    
+    return render(request,'validate_answer.html',{'mylist':mylist,'cnt':cnt,'cnt2':cnt2,'accuracy':accuracy, 'questions1':questions1})    
         
-[2,2]
-[2,3]
+def getpdf(request):  
+    response = HttpResponse(content_type='application/pdf')  
+    response['Content-Disposition'] = 'attachment; filename="Result.pdf"' 
+    total_question=request.POST.get('Total_Question')
+    correct_question=request.POST.get('Correct_Question')
+    accuracy=request.POST.get('Accuracy')
+    print(total_question)
+    print(correct_question)
+    print(accuracy)
+    p = canvas.Canvas(response)  
+    p.setFont("Times-Roman", 55)  
+    p.drawString(100,700, "Result") 
+    s1="Total Question"  +str(total_question)+'\n'
+    p.drawString(100,500,s1)
+    p.drawString(100,500,"Correct Question" +str(correct_question))  
+    p.drawString(100,500,"Accuracy" +str(accuracy))      
+    p.showPage()  
+    p.save()  
+    return response  

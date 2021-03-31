@@ -5,7 +5,33 @@
 <p class="error"> Invalid Username or Password </p>
 {% endif %}
 {% load static %}
-
+<html>
+  <body>
+    <style>
+      a:link {
+        color: green;
+        background-color: transparent;
+        text-decoration: none;
+      }
+      
+      a:visited {
+        color: pink;
+        background-color: transparent;
+        text-decoration: none;
+      }
+      
+      a:hover {
+        color: red;
+        background-color: transparent;
+        text-decoration: underline;
+      }
+      
+      a:active {
+        color: yellow;
+        background-color: transparent;
+        text-decoration: underline;
+      }
+      </style>
 <form action="/quizdb/give_quiz/" method = "post">{% csrf_token %}
   
     <meta charset="utf-8">
@@ -14,6 +40,7 @@
   
  
  <div class="banner">
+  
  <div class="login-box">
   <h1>Let's Go</h1>
   <div class="textbox">

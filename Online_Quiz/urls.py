@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
+from loginmodule.views import registration
 urlpatterns = [
 url('admin/', admin.site.urls),
 path('loginmodule/', include('loginmodule.urls')),
 url('quizdb/', include('quizdb.urls')),
+path('',registration.as_view(),name='registration')
 ]

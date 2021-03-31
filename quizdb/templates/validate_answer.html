@@ -1,11 +1,45 @@
 <html>
 <head>
-
+ 
+    <style>
+       
+        h1 {text-align: center;}
+        p {text-align: center;}
+        div {text-align: center;}
+        </style>
+ <title>Result</title>
 </head>
-<body>
-    <div class="row">
-        <title>Result</title>
-      <table width="600px" border="2" align="center" height="200px" >
+<body style="background-color:#2cabee">
+    
+       
+        <table class="table" style="padding: 5%; margin-left: 2%; margin-right: 10% ;" >
+            <thead class="thead-dark">
+              <tr>
+                <th colspan="2" align="center" scope="col">Result</th>
+              
+              </tr>
+            </thead>
+            <tbody style="width: 300px;" >
+              <tr>
+                
+                <td>Total Questions</td>
+                <td> {{cnt2}}</td>
+                
+              </tr>
+              <tr>
+               
+                <td>Correct Answers</td>
+                <td>{{cnt}}</td>
+                
+              </tr>
+              <tr>
+                
+                <td>Accuracy</td>
+                <td>{{accuracy}}%</td>
+                </tr>
+                </tbody>
+        </table>
+      <!-- <table width="400px" border="2" align="center" height="200px" >
         <tr>
             <th colspan="4" height="1">
             
@@ -39,31 +73,54 @@
                 {{accuracy}} %
             </td>
         </tr>
-       
-        
-    </table>
-        {% for i,j,k,l in mylist %}
-       <h2> Question {{k}} </h2>
+        </table>-->
+    </div> 
+    <div >
     
+    </form>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    </div>
+        {% for i,j,k,l,m in mylist %}
         {% if i == j %}
-        Your answer: &nbsp; &nbsp;{{i}} 
-        &#10004;
-        <br>
-        Correct answer: {{j}}
-        <br>
-        Solution: {{l}}
-        <h3>Your answer is correct</h3>
+        <div class="card border-primary mb-3" style="max-width: 18rem; margin: 2%;">
+            <div class="card-header">Question :{{m}}</div>
+            <div class="card-body text-primary">
+               
+                Your Option: &nbsp; &nbsp;{{i}} 
+                &#10004;
+                <br>
+                Correct Option: {{j}}
+                <br>
+                Solution: {{l}}
+              
+              <p class="card-text"><h3>Your answer is correct</h3></p>
+            </div>
+          </div>
+       
+    
+      
+        
         
         <br>
         {% endif %}
         {% if i != j %}
-        Your answer:  &nbsp; &nbsp; {{i}}
-         
-        &#10006;
-        <br>
-        Correct answer: {{j}}
-        <br>
-        Solution: {{l}}
+        <div class="card border-primary mb-3" style="max-width: 18rem; margin: 2%">
+            <div class="card-header">Question :{{m}}</div>
+            <div class="card-body text-primary">
+                
+                Your Option: &nbsp; &nbsp;{{i}} 
+                &#10006;
+                <br>
+                Correct Option: {{j}}
+                <br>
+                Solution: {{l}}
+              
+              <p class="card-text"><h3>Your answer is incorrect</h3></p>
+            </div>
+          </div>
+       
+        
         {% endif %}
         
         

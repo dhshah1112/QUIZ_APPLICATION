@@ -23,4 +23,5 @@ urlpatterns = [
     url('validate_answer/', views.validate_answer),
     #url(r'^create_quiz/$', views.create_quiz),
     path('students/', views.StudentListView.as_view(), name = 'students'),
+    path('getpdf/',views.getpdf),
 ]
