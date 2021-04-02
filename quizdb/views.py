@@ -11,7 +11,8 @@ from django.template.context_processors import csrf
 from quizdb.models import questions
 from quizdb.models import quiz
 from quizdb.models import teacher_questions
-
+import emoji
+import unicodedata
 # Create your views here..
 
 class StudentListView(generic.ListView):
@@ -160,19 +161,26 @@ def validate_answer(request):
 def getpdf(request):  
     response = HttpResponse(content_type='application/pdf')  
     response['Content-Disposition'] = 'attachment; filename="Result.pdf"' 
-    total_question=request.POST.get('Total_Question')
-    correct_question=request.POST.get('Correct_Question')
+    message="You need more practice"
     accuracy=request.POST.get('Accuracy')
-    print(total_question)
-    print(correct_question)
-    print(accuracy)
+   
+    total_question=request.POST.get('Total_Questions')
+    correct_answers=request.POST.get('Correct_Answers')
+   
     p = canvas.Canvas(response)  
-    p.setFont("Times-Roman", 55)  
-    p.drawString(100,700, "Result") 
-    s1="Total Question"  +str(total_question)+'\n'
-    p.drawString(100,500,s1)
-    p.drawString(100,500,"Correct Question" +str(correct_question))  
-    p.drawString(100,500,"Accuracy" +str(accuracy))      
+    p.setFont("Times-Roman", 30) 
+    p.setFillColorRGB(1,0,0)
+     
+    if float(accuracy)>= 50:
+        p.setFillColorRGB(0,0,0)
+        message="Well Done"
+    p.drawString(200,800, "Result")
+    p.drawString(100,600,"Total questions" + " = " +str(total_question))
+    p.drawString(100,500,"Correct answers" + " = " +str(correct_answers)) 
+    p.drawString(100,400,"Accuracy" + " = " +str(accuracy)+"%") 
+    p.drawString(100,300,message)
+    
+           
     p.showPage()  
     p.save()  
     return response  
